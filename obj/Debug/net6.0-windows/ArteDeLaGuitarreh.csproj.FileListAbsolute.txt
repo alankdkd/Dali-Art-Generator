@@ -1,0 +1,17 @@
+C:\Users\alank\source\ArteDeLaGuitarreh\bin\Debug\net6.0-windows\ArteDeLaGuitarreh.exe
+C:\Users\alank\source\ArteDeLaGuitarreh\bin\Debug\net6.0-windows\ArteDeLaGuitarreh.deps.json
+C:\Users\alank\source\ArteDeLaGuitarreh\bin\Debug\net6.0-windows\ArteDeLaGuitarreh.runtimeconfig.json
+C:\Users\alank\source\ArteDeLaGuitarreh\bin\Debug\net6.0-windows\ArteDeLaGuitarreh.dll
+C:\Users\alank\source\ArteDeLaGuitarreh\bin\Debug\net6.0-windows\ArteDeLaGuitarreh.pdb
+C:\Users\alank\source\ArteDeLaGuitarreh\obj\Debug\net6.0-windows\ArteDeLaGuitarreh.csproj.AssemblyReference.cache
+C:\Users\alank\source\ArteDeLaGuitarreh\obj\Debug\net6.0-windows\ArteDeLaGuitarreh.Form1.resources
+C:\Users\alank\source\ArteDeLaGuitarreh\obj\Debug\net6.0-windows\ArteDeLaGuitarreh.csproj.GenerateResource.cache
+C:\Users\alank\source\ArteDeLaGuitarreh\obj\Debug\net6.0-windows\ArteDeLaGuitarreh.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\alank\source\ArteDeLaGuitarreh\obj\Debug\net6.0-windows\ArteDeLaGuitarreh.AssemblyInfoInputs.cache
+C:\Users\alank\source\ArteDeLaGuitarreh\obj\Debug\net6.0-windows\ArteDeLaGuitarreh.AssemblyInfo.cs
+C:\Users\alank\source\ArteDeLaGuitarreh\obj\Debug\net6.0-windows\ArteDeLaGuitarreh.csproj.CoreCompileInputs.cache
+C:\Users\alank\source\ArteDeLaGuitarreh\obj\Debug\net6.0-windows\ArteDeLaGuitarreh.dll
+C:\Users\alank\source\ArteDeLaGuitarreh\obj\Debug\net6.0-windows\refint\ArteDeLaGuitarreh.dll
+C:\Users\alank\source\ArteDeLaGuitarreh\obj\Debug\net6.0-windows\ArteDeLaGuitarreh.pdb
+C:\Users\alank\source\ArteDeLaGuitarreh\obj\Debug\net6.0-windows\ArteDeLaGuitarreh.genruntimeconfig.cache
+C:\Users\alank\source\ArteDeLaGuitarreh\obj\Debug\net6.0-windows\ref\ArteDeLaGuitarreh.dll
