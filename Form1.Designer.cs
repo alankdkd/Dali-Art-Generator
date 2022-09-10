@@ -41,10 +41,10 @@
             this.label11 = new System.Windows.Forms.Label();
             this.BitmapWidth = new System.Windows.Forms.TextBox();
             this.BitmapHeight = new System.Windows.Forms.TextBox();
-            this.Lip = new System.Windows.Forms.TextBox();
+            this.BitmapBorder = new System.Windows.Forms.TextBox();
             this.NumRows = new System.Windows.Forms.TextBox();
             this.NumCols = new System.Windows.Forms.TextBox();
-            this.PixelSpacing = new System.Windows.Forms.TextBox();
+            this.PictGap = new System.Windows.Forms.TextBox();
             this.Dpi = new System.Windows.Forms.TextBox();
             this.PictureSize = new System.Windows.Forms.TextBox();
             this.SpaceFromTop = new System.Windows.Forms.TextBox();
@@ -78,11 +78,11 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(38, 113);
+            this.label3.Location = new System.Drawing.Point(111, 113);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(153, 15);
+            this.label3.Size = new System.Drawing.Size(83, 15);
             this.label3.TabIndex = 3;
-            this.label3.Text = "Lip (bitmap border, inches):";
+            this.label3.Text = "BitmapBorder:";
             // 
             // label4
             // 
@@ -127,7 +127,7 @@
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(133, 15);
             this.label8.TabIndex = 6;
-            this.label8.Text = "Picture Spacing (pixels):";
+            this.label8.Text = "Picture Spacing (inches):";
             // 
             // label9
             // 
@@ -145,7 +145,7 @@
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(115, 15);
             this.label10.TabIndex = 9;
-            this.label10.Text = "Picture Size (inches):";
+            this.label10.Text = "Picture Size (pixels):";
             // 
             // label11
             // 
@@ -172,13 +172,13 @@
             this.BitmapHeight.TabIndex = 12;
             this.BitmapHeight.TextChanged += new System.EventHandler(this.BitmapHeight_TextChanged);
             // 
-            // Lip
+            // BitmapBorder
             // 
-            this.Lip.Location = new System.Drawing.Point(204, 110);
-            this.Lip.Name = "Lip";
-            this.Lip.Size = new System.Drawing.Size(45, 23);
-            this.Lip.TabIndex = 13;
-            this.Lip.TextChanged += new System.EventHandler(this.Lip_TextChanged);
+            this.BitmapBorder.Location = new System.Drawing.Point(204, 110);
+            this.BitmapBorder.Name = "BitmapBorder";
+            this.BitmapBorder.Size = new System.Drawing.Size(45, 23);
+            this.BitmapBorder.TabIndex = 13;
+            this.BitmapBorder.TextChanged += new System.EventHandler(this.BitmapBorder_TextChanged);
             // 
             // NumRows
             // 
@@ -196,13 +196,13 @@
             this.NumCols.TabIndex = 15;
             this.NumCols.TextChanged += new System.EventHandler(this.NumCols_TextChanged);
             // 
-            // PixelSpacing
+            // PictGap
             // 
-            this.PixelSpacing.Location = new System.Drawing.Point(204, 275);
-            this.PixelSpacing.Name = "PixelSpacing";
-            this.PixelSpacing.Size = new System.Drawing.Size(45, 23);
-            this.PixelSpacing.TabIndex = 16;
-            this.PixelSpacing.TextChanged += new System.EventHandler(this.PixelSpacing_TextChanged);
+            this.PictGap.Location = new System.Drawing.Point(204, 275);
+            this.PictGap.Name = "PictGap";
+            this.PictGap.Size = new System.Drawing.Size(45, 23);
+            this.PictGap.TabIndex = 16;
+            this.PictGap.TextChanged += new System.EventHandler(this.PictGap_TextChanged);
             // 
             // Dpi
             // 
@@ -297,10 +297,10 @@
             this.Controls.Add(this.SpaceFromTop);
             this.Controls.Add(this.PictureSize);
             this.Controls.Add(this.Dpi);
-            this.Controls.Add(this.PixelSpacing);
+            this.Controls.Add(this.PictGap);
             this.Controls.Add(this.NumCols);
             this.Controls.Add(this.NumRows);
-            this.Controls.Add(this.Lip);
+            this.Controls.Add(this.BitmapBorder);
             this.Controls.Add(this.BitmapHeight);
             this.Controls.Add(this.BitmapWidth);
             this.Controls.Add(this.label11);
@@ -337,10 +337,10 @@
         private Label label11;
         private TextBox BitmapWidth;
         private TextBox BitmapHeight;
-        private TextBox Lip;
+        private TextBox BitmapBorder;
         private TextBox NumRows;
         private TextBox NumCols;
-        private TextBox PixelSpacing;
+        private TextBox PictGap;
         private TextBox Dpi;
         private TextBox PictureSize;
         private TextBox SpaceFromTop;
