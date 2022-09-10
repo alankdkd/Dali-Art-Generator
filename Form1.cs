@@ -5,15 +5,18 @@ namespace ArteDeLaGuitarra
 {
     public partial class Form1 : Form
     {
-        private bool m_bUpdate = true;          // Update parameter on text changed.
+        private bool Update = true;          // Update parameter on text changed.
         private Dictionary<string, string> dictVals = new Dictionary<string, string>();
-        string[] ParNames = { "BitmapWidth", "BitmapHeight", "BitmapBorder", "NumRows",
+        private string[] ParNames = { "BitmapWidth", "BitmapHeight", "BitmapBorder", "NumRows",
                               "NumCols", "SourceFolder", "StemName", "PictGap", "Dpi", "PictSize", "TopSpace" };
-        enum ParOrder  { BitmapWidth, BitmapHeight, BitmapBorder, NumRows,
-                         NumCols, SourceFolder, StemName, PictGap, DPI, PictSize, TopSpace };
+        private enum ParOrder  { BitmapWidth, BitmapHeight, BitmapBorder, NumRows,
+                                 NumCols, SourceFolder, StemName, PictGap, DPI, PictSize, TopSpace };
+        private RegistryKey daliKey;
 
         public Form1()
         {
+            //CenterToScreen();
+            StartPosition = FormStartPosition.CenterScreen;
             InitializeComponent();
             InitializeControlsFromRegistry();
         }
@@ -32,7 +35,7 @@ namespace ArteDeLaGuitarra
 
             if (swKey != null)
             {
-                RegistryKey daliKey = swKey.OpenSubKey("Dali", true);
+                daliKey = swKey.OpenSubKey("Dali", true);
 
                 if (daliKey == null)
                 {
@@ -52,6 +55,8 @@ namespace ArteDeLaGuitarra
                     daliKey.SetValue("TopSpace", "0");
                 }
             }
+            else
+                throw new Exception("No software key for current user");
         }
 
         private void FillDictFromRegistry()
@@ -89,59 +94,68 @@ namespace ArteDeLaGuitarra
             Application.Exit();
         }
 
+        private void DoUpdate(string key, string value)
+        {
+            if (Update)
+            {
+                dictVals[key] = value;
+                daliKey.SetValue(key, value);
+            }
+        }
+
         private void BitmapWidth_TextChanged(object sender, EventArgs e)
         {
-
+            DoUpdate("BitmapWidth", BitmapWidth.Text);
         }
 
         private void BitmapHeight_TextChanged(object sender, EventArgs e)
         {
-
+            DoUpdate("BitmapHeight", BitmapHeight.Text);
         }
 
         private void BitmapBorder_TextChanged(object sender, EventArgs e)
         {
-
+            DoUpdate("BitmapBorder", BitmapBorder.Text);
         }
 
         private void NumRows_TextChanged(object sender, EventArgs e)
         {
-
+            DoUpdate("NumRows", NumRows.Text);
         }
 
         private void NumCols_TextChanged(object sender, EventArgs e)
         {
-
+            DoUpdate("NumCols", NumCols.Text);
         }
 
         private void SourceFolder_TextChanged(object sender, EventArgs e)
         {
-
+            DoUpdate("SourceFolder", SourceFolder.Text);
         }
 
         private void StemName_TextChanged(object sender, EventArgs e)
         {
-
+            DoUpdate("StemName", StemName.Text);
         }
 
         private void PictGap_TextChanged(object sender, EventArgs e)
         {
-
+            DoUpdate("PictGap", PictGap.Text);
         }
 
         private void Dpi_TextChanged(object sender, EventArgs e)
         {
-
+            DoUpdate("Dpi", Dpi.Text);
         }
 
         private void PictureSize_TextChanged(object sender, EventArgs e)
         {
-
+            DoUpdate("PictSize", PictureSize.Text);
         }
 
         private void SpaceFromTop_TextChanged(object sender, EventArgs e)
         {
-
+            DoUpdate("TopSpace", SpaceFromTop.Text);
         }
         private void ShowBitmap(Formatter formatter)
         {
