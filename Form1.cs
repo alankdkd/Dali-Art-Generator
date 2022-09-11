@@ -5,12 +5,15 @@ namespace ArteDeLaGuitarra
 {
     public partial class Form1 : Form
     {
-        private bool Update = true;          // Update parameter on text changed.
+        public static string[] ParNames = { "BitmapWidth", "BitmapHeight", "BitmapBorder", "NumRows",
+                              "NumCols", "SourceFolder", "StemName", "PictGap", "Dpi", "PictSize",
+                              "TargetPictSize", "TopSpace" };
+        private bool UpdateVars = true;          // Update parameter on text changed.
         private Dictionary<string, string> dictVals = new Dictionary<string, string>();
-        private string[] ParNames = { "BitmapWidth", "BitmapHeight", "BitmapBorder", "NumRows",
-                              "NumCols", "SourceFolder", "StemName", "PictGap", "Dpi", "PictSize", "TopSpace" };
         private enum ParOrder  { BitmapWidth, BitmapHeight, BitmapBorder, NumRows,
-                                 NumCols, SourceFolder, StemName, PictGap, DPI, PictSize, TopSpace };
+                                 NumCols, SourceFolder, StemName, PictGap, DPI, PictSize,
+                                 TargetPictSize, TopSpace
+        };
         private RegistryKey daliKey;
 
         public Form1()
@@ -42,8 +45,8 @@ namespace ArteDeLaGuitarra
                     daliKey = swKey.CreateSubKey("Dali");
 
                     // Set value of sub key
-                    daliKey.SetValue("BitmapWidth", "0");
-                    daliKey.SetValue("BitmapHeight", "0");
+                    daliKey.SetValue("BitmapWidth", "36");
+                    daliKey.SetValue("BitmapHeight", "24");
                     daliKey.SetValue("BitmapBorder", "0");
                     daliKey.SetValue("NumRows", "8");
                     daliKey.SetValue("NumCols", "12");
@@ -52,6 +55,7 @@ namespace ArteDeLaGuitarra
                     daliKey.SetValue("PictGap", ".2");
                     daliKey.SetValue("DPI", "300");
                     daliKey.SetValue("PictSize", "256");
+                    daliKey.SetValue("TargetPictSize", "738");
                     daliKey.SetValue("TopSpace", "0");
                 }
             }
@@ -70,6 +74,7 @@ namespace ArteDeLaGuitarra
 
         private void SetControlsFromDict()
         {
+            UpdateVars = false;
             BitmapWidth.Text = dictVals["BitmapWidth"];
             BitmapHeight.Text = dictVals["BitmapHeight"];
             BitmapBorder.Text = dictVals["BitmapBorder"];
@@ -78,15 +83,19 @@ namespace ArteDeLaGuitarra
             PictGap.Text = dictVals["PictGap"];
             Dpi.Text = dictVals["Dpi"];
             PictureSize.Text = dictVals["PictSize"];
+            TargetPictureSize.Text = dictVals["TargetPictSize"];
             SpaceFromTop.Text = dictVals["TopSpace"];
             SourceFolder.Text = dictVals["SourceFolder"];
             StemName.Text = dictVals["StemName"];
+            UpdateVars = false;
         }
 
         private void MakeArtButton_Click(object sender, EventArgs e)
         {
+            Cursor.Current = Cursors.WaitCursor;
             Formatter formatter = new Formatter(dictVals);
-            ShowBitmap(formatter);
+            //ShowBitmap(formatter);
+            Cursor.Current = Cursors.Default;
         }
 
         private void CloseButton_Click(object sender, EventArgs e)
@@ -96,7 +105,7 @@ namespace ArteDeLaGuitarra
 
         private void DoUpdate(string key, string value)
         {
-            if (Update)
+            if (UpdateVars)
             {
                 dictVals[key] = value;
                 daliKey.SetValue(key, value);
@@ -151,6 +160,11 @@ namespace ArteDeLaGuitarra
         private void PictureSize_TextChanged(object sender, EventArgs e)
         {
             DoUpdate("PictSize", PictureSize.Text);
+        }
+
+        private void TargetPictureSize_TextChanged(object sender, EventArgs e)
+        {
+            DoUpdate("TargetPictSize", TargetPictureSize.Text);
         }
 
         private void SpaceFromTop_TextChanged(object sender, EventArgs e)
