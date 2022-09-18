@@ -8,9 +8,9 @@ namespace ArteDeLaGuitarra
 {
     public class Formatter
     {
-        private int BitmapWidth, BitmapHeight, BitmapBorder, NumRows, NumCols,
+        private int BitmapWidth, BitmapHeight, NumRows, NumCols,
                     Dpi, PictSize, TargetPictSize, TopSpace;
-        private float PictGap;
+        private float PictGap, BitmapBorder;
         private int leftBound, topBound;
         private int rowHeightPixels, colWidthPixels;
         private int xPixels, yPixels, PictGapPixels;
@@ -26,7 +26,7 @@ namespace ArteDeLaGuitarra
             GetVariablesFromDict();
             CalculateParameters();
             WriteBitmap();
-            bitmap.Save("Dali.png");
+            bitmap.Save("Dali.jpg");
         }
 
         public static string[] ParNames = { "BitmapWidth", "BitmapHeight", "BitmapBorder", "NumRows",
@@ -37,7 +37,7 @@ namespace ArteDeLaGuitarra
         {
             BitmapWidth = Int32.Parse(dict["BitmapWidth"]);
             BitmapHeight = Int32.Parse(dict["BitmapHeight"]);
-            BitmapBorder = Int32.Parse(dict["BitmapBorder"]);
+            BitmapBorder = float.Parse(dict["BitmapBorder"]);
             NumRows = Int32.Parse(dict["NumRows"]);
             NumCols = Int32.Parse(dict["NumCols"]);
             SourceFolder = dict["SourceFolder"];
@@ -55,8 +55,10 @@ namespace ArteDeLaGuitarra
             yPixels = BitmapHeight * Dpi;
             PictGapPixels = (int) Math.Round(PictGap * Dpi);
 
-            int availableSpaceRow = xPixels - 2 * BitmapBorder;
-            int availableSpaceCol = yPixels - 2 * BitmapBorder;
+            int borderPixels = (int) Math.Floor(2.0 * BitmapBorder * Dpi);
+            int availableSpaceRow = xPixels - borderPixels;
+            int availableSpaceCol = yPixels - borderPixels;
+
             int neededSpaceRow, neededSpaceCol;
             NumCols = availableSpaceRow / TargetPictSize + 1;
             NumRows = availableSpaceCol / TargetPictSize + 1;
@@ -75,8 +77,8 @@ namespace ArteDeLaGuitarra
             }
             while (neededSpaceCol > availableSpaceCol);
 
-            leftBound = BitmapBorder + (availableSpaceRow - neededSpaceRow) / 2;
-            topBound = BitmapBorder + (availableSpaceCol - neededSpaceCol) / 2;
+            leftBound = borderPixels / 2 + (availableSpaceRow - neededSpaceRow) / 2;
+            topBound = borderPixels / 2 + (availableSpaceCol - neededSpaceCol) / 2;
             rowHeightPixels = TargetPictSize + PictGapPixels;
             colWidthPixels = TargetPictSize + PictGapPixels;
         }

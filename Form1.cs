@@ -87,7 +87,7 @@ namespace ArteDeLaGuitarra
             SpaceFromTop.Text = dictVals["TopSpace"];
             SourceFolder.Text = dictVals["SourceFolder"];
             StemName.Text = dictVals["StemName"];
-            UpdateVars = false;
+            UpdateVars = true;
         }
 
         private void MakeArtButton_Click(object sender, EventArgs e)
