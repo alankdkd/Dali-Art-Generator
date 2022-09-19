@@ -7,12 +7,12 @@ namespace ArteDeLaGuitarra
     {
         public static string[] ParNames = { "BitmapWidth", "BitmapHeight", "BitmapBorder", "NumRows",
                               "NumCols", "SourceFolder", "StemName", "PictGap", "Dpi", "PictSize",
-                              "TargetPictSize", "TopSpace" };
+                              "TargetPictSize", "TopSpace", "Message" };
         private bool UpdateVars = true;          // Update parameter on text changed.
         private Dictionary<string, string> dictVals = new Dictionary<string, string>();
         private enum ParOrder  { BitmapWidth, BitmapHeight, BitmapBorder, NumRows,
                                  NumCols, SourceFolder, StemName, PictGap, DPI, PictSize,
-                                 TargetPictSize, TopSpace
+                                 TargetPictSize, TopSpace, Message,
         };
         private RegistryKey daliKey;
 
@@ -47,7 +47,7 @@ namespace ArteDeLaGuitarra
                     // Set value of sub key
                     daliKey.SetValue("BitmapWidth", "36");
                     daliKey.SetValue("BitmapHeight", "24");
-                    daliKey.SetValue("BitmapBorder", "0");
+                    daliKey.SetValue("BitmapBorder", ".5");
                     daliKey.SetValue("NumRows", "8");
                     daliKey.SetValue("NumCols", "12");
                     daliKey.SetValue("SourceFolder", @"C:\Users\alank\Pictures");
@@ -57,6 +57,7 @@ namespace ArteDeLaGuitarra
                     daliKey.SetValue("PictSize", "256");
                     daliKey.SetValue("TargetPictSize", "738");
                     daliKey.SetValue("TopSpace", "0");
+                    daliKey.SetValue("Message", "Copyright © 2022 Alan Balkany.");
                 }
             }
             else
@@ -69,24 +70,39 @@ namespace ArteDeLaGuitarra
             RegistryKey daliKey = swKey.OpenSubKey("Dali", true);
 
             foreach (string key in ParNames)
-                dictVals[key] = daliKey.GetValue(key).ToString();
+            {
+                object val = daliKey.GetValue(key);
+
+                    if (val != null)
+                        dictVals[key] = val.ToString();
+            }
         }
 
         private void SetControlsFromDict()
         {
             UpdateVars = false;
-            BitmapWidth.Text = dictVals["BitmapWidth"];
-            BitmapHeight.Text = dictVals["BitmapHeight"];
-            BitmapBorder.Text = dictVals["BitmapBorder"];
-            NumRows.Text = dictVals["NumRows"];
-            NumCols.Text = dictVals["NumCols"];
-            PictGap.Text = dictVals["PictGap"];
-            Dpi.Text = dictVals["Dpi"];
-            PictureSize.Text = dictVals["PictSize"];
-            TargetPictureSize.Text = dictVals["TargetPictSize"];
-            SpaceFromTop.Text = dictVals["TopSpace"];
-            SourceFolder.Text = dictVals["SourceFolder"];
-            StemName.Text = dictVals["StemName"];
+            try
+            {
+                BitmapWidth.Text = dictVals["BitmapWidth"];
+                BitmapHeight.Text = dictVals["BitmapHeight"];
+                BitmapBorder.Text = dictVals["BitmapBorder"];
+                NumRows.Text = dictVals["NumRows"];
+                NumCols.Text = dictVals["NumCols"];
+                PictGap.Text = dictVals["PictGap"];
+                Dpi.Text = dictVals["Dpi"];
+                PictureSize.Text = dictVals["PictSize"];
+                TargetPictureSize.Text = dictVals["TargetPictSize"];
+                SpaceFromTop.Text = dictVals["TopSpace"];
+                SourceFolder.Text = dictVals["SourceFolder"];
+                StemName.Text = dictVals["StemName"];
+                CopyrightMessage.Text = dictVals["Message"];
+            }
+
+            catch (Exception)
+            {
+                MessageBox.Show("Problem in SetControlsFromDict().");
+            }
+
             UpdateVars = true;
         }
 
@@ -107,8 +123,10 @@ namespace ArteDeLaGuitarra
         {
             if (UpdateVars)
             {
+                if (key != "Message")
+                    daliKey.SetValue(key, value);
+                
                 dictVals[key] = value;
-                daliKey.SetValue(key, value);
             }
         }
 
@@ -171,7 +189,13 @@ namespace ArteDeLaGuitarra
         {
             DoUpdate("TopSpace", SpaceFromTop.Text);
         }
-        private void ShowBitmap(Formatter formatter)
+ 
+        private void CopyrightMessage_TextChanged(object sender, EventArgs e)
+        {
+            DoUpdate("Message", CopyrightMessage.Text);
+        }
+
+       private void ShowBitmap(Formatter formatter)
         {
             throw new NotImplementedException();
         }

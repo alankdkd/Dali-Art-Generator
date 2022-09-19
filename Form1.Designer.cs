@@ -56,6 +56,8 @@
             this.label12 = new System.Windows.Forms.Label();
             this.TargetPictureSize = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
+            this.CopyrightMessage = new System.Windows.Forms.TextBox();
+            this.label14 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.TheBitmap)).BeginInit();
             this.SuspendLayout();
             // 
@@ -271,7 +273,7 @@
             // MakeArtButton
             // 
             this.MakeArtButton.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.MakeArtButton.Location = new System.Drawing.Point(1036, 36);
+            this.MakeArtButton.Location = new System.Drawing.Point(1036, 37);
             this.MakeArtButton.Margin = new System.Windows.Forms.Padding(4);
             this.MakeArtButton.Name = "MakeArtButton";
             this.MakeArtButton.Size = new System.Drawing.Size(129, 78);
@@ -283,7 +285,7 @@
             // CloseButton
             // 
             this.CloseButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.CloseButton.Location = new System.Drawing.Point(1036, 149);
+            this.CloseButton.Location = new System.Drawing.Point(1036, 150);
             this.CloseButton.Margin = new System.Windows.Forms.Padding(4);
             this.CloseButton.Name = "CloseButton";
             this.CloseButton.Size = new System.Drawing.Size(129, 78);
@@ -330,11 +332,32 @@
             this.label13.TabIndex = 26;
             this.label13.Text = "Target Picture Size (pixels):";
             // 
+            // CopyrightMessage
+            // 
+            this.CopyrightMessage.Location = new System.Drawing.Point(264, 587);
+            this.CopyrightMessage.Margin = new System.Windows.Forms.Padding(4);
+            this.CopyrightMessage.Name = "CopyrightMessage";
+            this.CopyrightMessage.Size = new System.Drawing.Size(901, 29);
+            this.CopyrightMessage.TabIndex = 29;
+            this.CopyrightMessage.TextChanged += new System.EventHandler(this.CopyrightMessage_TextChanged);
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(178, 591);
+            this.label14.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(80, 21);
+            this.label14.TabIndex = 28;
+            this.label14.Text = "Message:";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1217, 618);
+            this.ClientSize = new System.Drawing.Size(1212, 658);
+            this.Controls.Add(this.CopyrightMessage);
+            this.Controls.Add(this.label14);
             this.Controls.Add(this.TargetPictureSize);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.label12);
@@ -403,5 +426,7 @@
         private PictureBox TheBitmap;
         private Label label12;
         private Label label13;
+        private TextBox CopyrightMessage;
+        private Label label14;
     }
 }
