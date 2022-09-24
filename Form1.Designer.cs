@@ -58,6 +58,7 @@
             this.label13 = new System.Windows.Forms.Label();
             this.CopyrightMessage = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
+            this.checkGrow = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.TheBitmap)).BeginInit();
             this.SuspendLayout();
             // 
@@ -351,11 +352,23 @@
             this.label14.TabIndex = 28;
             this.label14.Text = "Message:";
             // 
+            // checkGrow
+            // 
+            this.checkGrow.AutoSize = true;
+            this.checkGrow.Location = new System.Drawing.Point(393, 500);
+            this.checkGrow.Name = "checkGrow";
+            this.checkGrow.Size = new System.Drawing.Size(154, 25);
+            this.checkGrow.TabIndex = 30;
+            this.checkGrow.Text = "Grow to Fit Page";
+            this.checkGrow.UseVisualStyleBackColor = true;
+            this.checkGrow.CheckedChanged += new System.EventHandler(this.checkGrow_CheckedChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1212, 658);
+            this.Controls.Add(this.checkGrow);
             this.Controls.Add(this.CopyrightMessage);
             this.Controls.Add(this.label14);
             this.Controls.Add(this.TargetPictureSize);
@@ -428,5 +441,6 @@
         private Label label13;
         private TextBox CopyrightMessage;
         private Label label14;
+        private CheckBox checkGrow;
     }
 }

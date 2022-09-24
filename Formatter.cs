@@ -20,7 +20,8 @@ namespace ArteDeLaGuitarra
         private int fileNumEnd;
         private string SourceFolder, StemName, Message;
         Dictionary<string, string> dict;
-        Bitmap? bitmap = null;
+        Bitmap? bitmap;
+        bool Grow = false;
 
         public Formatter(Dictionary<string, string> theDict)
         {
@@ -29,11 +30,15 @@ namespace ArteDeLaGuitarra
             CalculateParameters();
             WriteBitmap();
             bitmap.Save("Dali.jpg");
+            dict["TargetPictSize"] = TargetPictSize.ToString();
+
         }
 
         public static string[] ParNames = { "BitmapWidth", "BitmapHeight", "BitmapBorder", "NumRows",
                               "NumCols", "SourceFolder", "StemName", "PictGap", "Dpi", "PictSize",
                                "TargetPictSize", "TopSpace", "Message" };
+
+        public Bitmap? Bitmap { get => bitmap; set => bitmap = value; }
 
         private void GetVariablesFromDict()
         {
@@ -50,6 +55,7 @@ namespace ArteDeLaGuitarra
             TargetPictSize = Int32.Parse(dict["TargetPictSize"]);
             TopSpace = Int32.Parse(dict["TopSpace"]);
             Message = dict["Message"];
+            Grow = (dict["Grow"] == "false")  ?  false  :  true; 
         }
 
         private void CalculateParameters()
@@ -80,10 +86,31 @@ namespace ArteDeLaGuitarra
             }
             while (neededSpaceCol > availableSpaceCol);
 
+            if (Grow)
+                GrowTargetPictSize(ref availableSpaceRow, ref availableSpaceCol,
+                    ref neededSpaceRow, ref neededSpaceCol,
+                    NumRows, NumCols, ref TargetPictSize);
+
             leftBound = borderPixels / 2 + (availableSpaceRow - neededSpaceRow) / 2;
             topBound = borderPixels / 2 + (availableSpaceCol - neededSpaceCol) / 2;
             rowHeightPixels = TargetPictSize + PictGapPixels;
             colWidthPixels = TargetPictSize + PictGapPixels;
+        }
+
+        private void GrowTargetPictSize(ref int availableSpaceRow, ref int availableSpaceCol,
+             ref int neededSpaceRow, ref int neededSpaceCol, int NumRows, int NumCols,
+             ref int targetPictSize)
+        {
+            int extraX = (int) ((availableSpaceRow - neededSpaceRow) / NumCols);
+            int extraY = (int) ((availableSpaceCol - neededSpaceCol) / NumRows);
+            int minExtra = Math.Min(extraY, extraX);
+
+            if (minExtra  >  0)
+            {
+                targetPictSize += minExtra;
+                neededSpaceRow += (minExtra * NumCols);
+                neededSpaceCol += (minExtra * NumRows);
+            }
         }
 
         private void WriteBitmap()

@@ -7,13 +7,9 @@ namespace ArteDeLaGuitarra
     {
         public static string[] ParNames = { "BitmapWidth", "BitmapHeight", "BitmapBorder", "NumRows",
                               "NumCols", "SourceFolder", "StemName", "PictGap", "Dpi", "PictSize",
-                              "TargetPictSize", "TopSpace", "Message" };
+                              "TargetPictSize", "TopSpace", "Message", "Grow" };
         private bool UpdateVars = true;          // Update parameter on text changed.
         private Dictionary<string, string> dictVals = new Dictionary<string, string>();
-        private enum ParOrder  { BitmapWidth, BitmapHeight, BitmapBorder, NumRows,
-                                 NumCols, SourceFolder, StemName, PictGap, DPI, PictSize,
-                                 TargetPictSize, TopSpace, Message,
-        };
         private RegistryKey daliKey;
 
         public Form1()
@@ -50,7 +46,7 @@ namespace ArteDeLaGuitarra
                     daliKey.SetValue("BitmapBorder", ".5");
                     daliKey.SetValue("NumRows", "8");
                     daliKey.SetValue("NumCols", "12");
-                    daliKey.SetValue("SourceFolder", @"C:\Users\alank\Pictures");
+                    daliKey.SetValue("SourceFolder", @"C:\Users\alank\source\Dali\Pictures");
                     daliKey.SetValue("StemName", "DaliGuitar");
                     daliKey.SetValue("PictGap", ".2");
                     daliKey.SetValue("DPI", "300");
@@ -58,6 +54,7 @@ namespace ArteDeLaGuitarra
                     daliKey.SetValue("TargetPictSize", "738");
                     daliKey.SetValue("TopSpace", "0");
                     daliKey.SetValue("Message", "Copyright © 2022 Alan Balkany.");
+                    daliKey.SetValue("Grow", "false");
                 }
             }
             else
@@ -96,6 +93,12 @@ namespace ArteDeLaGuitarra
                 SourceFolder.Text = dictVals["SourceFolder"];
                 StemName.Text = dictVals["StemName"];
                 CopyrightMessage.Text = dictVals["Message"];
+
+                if (dictVals["Grow"] == "false")
+                    checkGrow.Checked = false;
+                else
+                    checkGrow.Checked = true;
+
             }
 
             catch (Exception)
@@ -110,7 +113,8 @@ namespace ArteDeLaGuitarra
         {
             Cursor.Current = Cursors.WaitCursor;
             Formatter formatter = new Formatter(dictVals);
-            //ShowBitmap(formatter);
+            TheBitmap.Image = formatter.Bitmap;
+            TargetPictureSize.Text = dictVals["TargetPictSize"];
             Cursor.Current = Cursors.Default;
         }
 
@@ -195,9 +199,10 @@ namespace ArteDeLaGuitarra
             DoUpdate("Message", CopyrightMessage.Text);
         }
 
-       private void ShowBitmap(Formatter formatter)
+        private void checkGrow_CheckedChanged(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            string grow = (checkGrow.Checked)  ?  "true"  :  "false";
+            DoUpdate("Grow", grow);
         }
     }
 }
